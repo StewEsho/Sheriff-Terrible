@@ -1,14 +1,16 @@
 ---------------------------------------------------------------------------------
 --
--- main.lua
+-- gameloop.lua
 --
 ---------------------------------------------------------------------------------
-local gameloop = require("gameloop");
+local gameloop = {}
 
-gameloop:init()
-
-local function runGameloop()
-  gameloop:run();
+function gameloop:init()
+  
 end
 
-Runtime:addEventListener("enterFrame", runGameloop)
+function gameloop:run()
+
+end
+
+return gameloop;
