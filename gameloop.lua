@@ -12,8 +12,7 @@ local movementX, movementY = 0
 local enemy1;
 
 function gameloop:init()
-  --AudioManager:playSound("sounds/funnymusic.mp3")
-  enemy1 = baseEnemy:new(display.contentWidth/2, display.contentHeight/2, {sprite = "img/sprite/placeholderEnemy1.png"})
+  AudioManager:playSound("sounds/funnymusic.mp3")
   enemy:init();
   enemy:spawn(1, display.contentWidth/2, display.contentHeight/2)
   enemy:spawn(1, 300, 25);
