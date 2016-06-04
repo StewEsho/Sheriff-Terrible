@@ -7,7 +7,7 @@ local enemy = require("enemymanager");
 local gameloop = {}
 local AudioManager = require("AudioManager")
 
-local movementX, movementY = 0
+local movementX, movementY = 0;
 
 local enemy1;
 
