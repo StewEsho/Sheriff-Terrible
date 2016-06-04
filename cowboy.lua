@@ -15,7 +15,7 @@ function cowboy:new(_x, _y, params)
   local height = params.height or 60;
 
   --initializes the sprite
-  sprite = display.newImageRect("img/sprite/placeholderEnemy1.png", width, height)
+  sprite = display.newImageRect("img/sprite/cowboy.png", width, height)
   sprite.x = x;
   sprite.y = y;
   sprite.enemyType = 1;
@@ -27,7 +27,7 @@ function cowboy:new(_x, _y, params)
     if(self.x - waypointX < 0.2 and self.x - waypointX > -0.2) then
       self:newWaypoint();
     else
-      self.x = self.x + (waypointX - self.x)*(math.random(1, 50)/100);
+      self.x = self.x + (waypointX - self.x)*0.1;
     end
     x = self.x;
     y = self.y;

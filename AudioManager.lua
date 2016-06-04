@@ -24,7 +24,7 @@ function AudioManager:playMusic(filename, fadeinNum, loopNum)
 	local isChannel2Active = audio.isChannelActive(2)
 
 	--If No Parameter For loopNum then Loop the song
-	if loopNum == nil then loopNum = -1 end
+	loopNum = loopNum or -1
 
 	--Load Music
 	local musicToPlay = audio.loadStream(filename)

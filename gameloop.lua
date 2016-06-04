@@ -12,7 +12,8 @@ local movementX, movementY = 0;
 local enemy1;
 
 function gameloop:init()
-  AudioManager:playSound("sounds/placeholdMusic.mp3")
+  --AudioManager:playSound("music/action1.mp3", 1, -1);
+  AudioManager:setMusicVolume(1);
   enemy:init();
   enemy:spawn(1, display.contentWidth/2, display.contentHeight/2)
   enemy:spawn(1, 300, 25);
