@@ -1,21 +1,21 @@
 --------------------------------------------------------------------------------
 --
--- cowboy.lua
+-- twista.lua
 --
 --------------------------------------------------------------------------------
 
-local cowboy = {};
+local dolphin = {};
 
 --constructor; contains all class-encapsulated functions
-function cowboy:new(_x, _y, params)
+function dolphin:new(_x, _y, params)
   --Variables
   local x = _x;
   local y = _y;
-  local width = params.width or 35;
-  local height = params.height or 60;
+  local width = params.width or 60;
+  local height = params.height or 35;
 
   --initializes the sprite
-  sprite = display.newImageRect("img/sprite/placeholderEnemy1.png", width, height)
+  sprite = display.newImageRect("img/sprite/placeholderEnemy2.png", width, height)
   sprite.x = x;
   sprite.y = y;
   sprite.enemyType = 1;
@@ -24,10 +24,10 @@ function cowboy:new(_x, _y, params)
   if(waypointX == 1) then waypointX = display.contentWidth; end
 
   function sprite:run()
-    if(self.x - waypointX < 0.2 and self.x - waypointX > -0.2) then
+    if(self.x - waypointX < 0.01 and self.x - waypointX > -0.07) then
       self:newWaypoint();
     else
-      self.x = self.x + (waypointX - self.x)*(math.random(1, 50)/100);
+      self.x = self.x + (waypointX - self.x)*0.001;
     end
     x = self.x;
     y = self.y;
@@ -46,4 +46,4 @@ function cowboy:new(_x, _y, params)
   return sprite;
 end
 
-return cowboy;
+return dolphin;

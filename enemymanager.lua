@@ -4,14 +4,17 @@
 --
 --------------------------------------------------------------------------------
 local cowboy = require("cowboy")
+local dolphin = require("dolphin");
 local eman = {}
 
 --list of modules
 --[[
   [1] - Cowboy
+  [2] - Dolphin
 ]]--
 eman.moduleList = {
-  cowboy
+  cowboy,
+  dolphin
 }
 
 --stores the individual character instances
