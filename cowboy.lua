@@ -1,18 +1,20 @@
 --------------------------------------------------------------------------------
 --
--- enemy.lua
+-- cowboy.lua
 --
 --------------------------------------------------------------------------------
 
-local enemy = {};
+local cowboy = {};
 
-function enemy:new(_x, _y, params)
+--constructor; contains all class-encapsulated functions
+function cowboy:new(_x, _y, params)
   --Variables
   local x = _x;
   local y = _y;
-  local width = params.width or 85;
-  local height = params.height or 125;
-  local sprite = 3;
+  local width = params.width or 35;
+  local height = params.height or 60;
+  local sprite = nil;
+  local enemyType = 1;
 
   --initializes sprite;
   if (params.sprite) then
@@ -25,19 +27,18 @@ function enemy:new(_x, _y, params)
 
   local waypointX = math.random(0, 1);
   if(waypointX == 1) then waypointX = display.contentWidth; end
-  print(sprite.x - waypointX);
 
   function sprite:run()
-    if(self.x - waypointX < 40 and self.x - waypointX > -1) then
+    if(self.x - waypointX < 0.2 and self.x - waypointX > -0.2) then
       self:newWaypoint();
     else
-      self.x = self.x + (waypointX - self.x)*0.01
-      print ((waypointX - self.x))
+      self.x = self.x + (waypointX - self.x)*(math.random(1, 50)/100);
     end
     x = self.x;
     y = self.y;
   end
 
+  --selects a new waypoint for the enemy to run too
   function sprite:newWaypoint()
     if(waypointX == display.contentWidth) then
       waypointX = 0;
@@ -50,4 +51,4 @@ function enemy:new(_x, _y, params)
   return sprite;
 end
 
-return enemy;
+return cowboy;
