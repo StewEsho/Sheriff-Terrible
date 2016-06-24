@@ -20,19 +20,23 @@ function cowboy:new(_x, _y, params)
   sprite.y = y;
   sprite.enemyType = 1;
   sprite.speed = 30;
+  sprite.isDead = false;
+  sprite:addEventListener("touch", function(e) e.target.isDead = true; e.target.isVisible = false; end);
 
   local waypointX = math.random(0, 1);
   if(waypointX == 1) then waypointX = display.contentWidth; end
 
   function sprite:run()
-    if(self.x - waypointX < 20 and self.x - waypointX > -20) then
-      self:newWaypoint();
-      self.speed = math.random(6, 40);
-    else
-      self.x = self.x + (waypointX - self.x)/self.speed;
+    if(self) then
+      if(self.x - waypointX < 20 and self.x - waypointX > -20) then
+        self:newWaypoint();
+        self.speed = math.random(6, 40);
+      else
+        self.x = self.x + (waypointX - self.x)/self.speed;
+      end
+      x = self.x;
+      y = self.y;
     end
-    x = self.x;
-    y = self.y;
   end
 
   --selects a new waypoint for the enemy to run too
@@ -43,6 +47,17 @@ function cowboy:new(_x, _y, params)
       waypointX = display.contentWidth;
     end
     return waypointX;
+  end
+
+  function sprite:getIsDead()
+    return self.isDead;
+  end
+
+  function sprite:getDeltaTime()
+      local temp = system.getTimer()  -- Get current game time in ms
+      local deltaTime = (temp-runtime) / (1000/60)  -- 60 fps or 30 fps as base
+      runtime = temp  -- Store game time
+      return deltaTime;
   end
 
   return sprite;

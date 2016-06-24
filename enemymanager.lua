@@ -39,7 +39,14 @@ end
 function eman:run()
   for i = 1, table.getn(self.enemyList) do
     for j = 1, table.getn(self.enemyList[i]) do
-      self.enemyList[i][j]:run();
+      if(self.enemyList[i][j]) then
+        if(self.enemyList[i][j]:getIsDead() ~= true) then
+          self.enemyList[i][j]:run();
+        else
+          self.enemyList[i][j]:removeSelf();
+          table.remove(self.enemyList[i], j);
+        end
+      end
     end
   end
 end
