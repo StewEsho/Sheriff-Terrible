@@ -15,9 +15,9 @@ local runtime;
 local spawnTime;
 local title, subtitle;
 local skyBG;
-local reactTimer;
-local wastedSeconds, wastedSecondsText;
+local wastedSeconds, totalWastedSeconds, wastedSecondsText;
 local scoreText;
+local isDrawTime;
 
 function gameloop:init()
   --AudioManager:playSound("music/action1.mp3", 1, -1);
@@ -35,33 +35,41 @@ function gameloop:init()
   subtitle:setFillColor(1, 1, 1);
 
   wastedSecondsText = display.newText("Total Draw Time: 0.00", display.contentWidth/2, 90, "font/CabinSketch-Bold.ttf", 18);
+  wastedSeconds = 0; totalWastedSeconds = 0;
   scoreText = display.newText("Duels Won: 0", display.contentWidth/2, 110, "font/CabinSketch-Bold.ttf", 18);
 
   enemy:init();
   timer = 25;
   runtime = 0;
-  spawnTime = math.random(45, 400);
-  reactTimer = 0;
+  spawnTime = math.random(45, 600);
+  isDrawTime = false;
 end
 
 function gameloop:run()
   scoreText.text = "Duels Won: " .. globals.score;
+  wastedSecondsText.text = "Total Draw Time: " .. string.format("%.2f", (totalWastedSeconds + wastedSeconds));
 
   if(#enemy:get(1) < 3) then
     timer = timer + getDeltaTime();
   else
     timer = 0;
-    spawnTime = math.random(45, 400);
+    spawnTime = math.random(45, 600);
   end
 
-  if(#enemy:get(1) > 0)then
-    reactTimer = reactTimer + getDeltaTime();
+  if(#enemy:get(1) >= 1)then
+    isDrawTime = true;
+    wastedSeconds = wastedSeconds + 1/60;
+  end
+  if(#enemy:get(1) <= 0 and isDrawTime) then
+    isDrawTime = false;
+    totalWastedSeconds = totalWastedSeconds + wastedSeconds;
+    wastedSeconds = 0.00;
   end
 
   if (timer > spawnTime and #enemy:get(1) < 3) then
     enemy:spawn(1, math.random(0, display.contentWidth), math.random(150, display.contentHeight-60));
     timer = 0;
-    spawnTime = math.random(45, 400);
+    spawnTime = math.random(45, 600);
   end
   enemy:run();
 end
