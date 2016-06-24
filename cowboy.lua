@@ -21,7 +21,11 @@ function cowboy:new(_x, _y, params)
   sprite.enemyType = 1;
   sprite.speed = 30;
   sprite.isDead = false;
-  sprite:addEventListener("touch", function(e) e.target.isDead = true; e.target.isVisible = false; end);
+  sprite:addEventListener("touch", function(e)  if(e.phase == "began") then
+                                                  e.target.isDead = true;
+                                                  e.target.isVisible = false;
+                                                end
+                                              end);
 
   local waypointX = math.random(0, 1);
   if(waypointX == 1) then waypointX = display.contentWidth; end
