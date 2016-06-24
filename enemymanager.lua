@@ -44,4 +44,14 @@ function eman:run()
   end
 end
 
+function eman:get(i1, i2)
+  if(i1 == nil) then
+    return self.enemyList;
+  elseif(i2 == nil) then
+    return self.enemyList[i1];
+  else
+    return self.enemyList[i1][i2];
+  end
+end
+
 return eman;

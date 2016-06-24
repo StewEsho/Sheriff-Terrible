@@ -19,15 +19,17 @@ function cowboy:new(_x, _y, params)
   sprite.x = x;
   sprite.y = y;
   sprite.enemyType = 1;
+  sprite.speed = 30;
 
   local waypointX = math.random(0, 1);
   if(waypointX == 1) then waypointX = display.contentWidth; end
 
   function sprite:run()
-    if(self.x - waypointX < 0.2 and self.x - waypointX > -0.2) then
+    if(self.x - waypointX < 20 and self.x - waypointX > -20) then
       self:newWaypoint();
+      self.speed = math.random(6, 40);
     else
-      self.x = self.x + (waypointX - self.x)*0.1;
+      self.x = self.x + (waypointX - self.x)/self.speed;
     end
     x = self.x;
     y = self.y;
