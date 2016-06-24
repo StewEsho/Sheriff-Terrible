@@ -41,13 +41,13 @@ function gameloop:run()
     timer = timer + getDeltaTime();
   else
     timer = 0;
-    spawnTime = math.random(45, 105);
+    spawnTime = math.random(45, 400);
   end
 
   if (timer > spawnTime and #enemy:get(1) < 3) then
     enemy:spawn(1, math.random(0, display.contentWidth), math.random(150, display.contentHeight-60));
     timer = 0;
-    spawnTime = math.random(45, 105);
+    spawnTime = math.random(45, 400);
   end
   enemy:run();
 end
