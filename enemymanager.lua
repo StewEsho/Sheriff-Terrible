@@ -5,6 +5,7 @@
 --------------------------------------------------------------------------------
 local cowboy = require("cowboy")
 local dolphin = require("dolphin");
+local globals = require("globals");
 local eman = {}
 
 --list of modules
@@ -21,6 +22,7 @@ eman.moduleList = {
 eman.enemyList = {};
 
 function eman:init()
+  print("Types of Enemies:");
   for i = 1, table.getn(self.moduleList) do
     print(i);
     self.enemyList[i] = {};
@@ -45,6 +47,7 @@ function eman:run()
         else
           self.enemyList[i][j]:removeSelf();
           table.remove(self.enemyList[i], j);
+          globals.score = globals.score + 1;
         end
       end
     end
